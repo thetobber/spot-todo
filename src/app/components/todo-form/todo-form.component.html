@@ -1,0 +1,20 @@
+<form [formGroup]="todoForm" novalidate>
+  <div class="todo-form-group">
+    <label for="title" class="todo-form-label">Title</label>
+    <input id="title" class="todo-form-control" type="text" formControlName="title" />
+  </div>
+
+  <div class="todo-form-group">
+    <label for="content" class="todo-form-label">Description</label>
+    <textarea id="content" class="todo-form-control" formControlName="content"></textarea>
+  </div>
+
+  <div class="todo-form-group">
+    <label for="completed" class="todo-form-label">
+      <input id="completed" class="todo-form-control" type="checkbox" formControlName="completed" />
+      <span>Is the task completed?</span>
+    </label>
+  </div>
+
+  <button class="todo-button" (click)="addItem()" [disabled]="todoForm.status !== 'VALID'">Add</button>
+</form>
