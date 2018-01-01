@@ -1,13 +1,14 @@
-<div class="todo-list-item" *ngFor="let item of items">
+<div class="todo-list-item" *ngFor="let item of data">
   <h2 class="todo-list-item-header">{{ item.title }}</h2>
   <p>{{ item.content }}</p>
   <div class="todo-list-item-actions">
-
     <label>
-      <input type="checkbox" (click)="updateItem(item)" [checked]="item.completed" />
+      <!-- <input type="checkbox" (click)="updateItem(item)" [checked]="item.completed" /> -->
+      <input type="checkbox" (click)="completeItem(item)">
       <span>{{ item.completed ? 'uncheck to remove from completed' : 'check to complete' }}</span>
     </label>
-
+    <a href="#">Edit</a>
+    <!-- <button (click)="deleteItem(item)">Delete</button> -->
     <button (click)="deleteItem(item)">Delete</button>
   </div>
 </div>

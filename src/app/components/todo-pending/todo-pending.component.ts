@@ -1,40 +1,19 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
 import { TodoItem } from '../../models/todo-item.model';
-import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-todo-pending',
-  templateUrl: './todo-pending.component.html',
-  styleUrls: ['./todo-pending.component.scss']
+  templateUrl: './todo-pending.component.html'
 })
-export class TodoPendingComponent implements OnInit, OnDestroy {
+export class TodoPendingComponent implements OnInit {
+  items: TodoItem[];
 
-  private items: TodoItem[];
-  private todoChange: Subscription;
+  constructor(private todoService: TodoService) { }
 
-  public constructor(private todoService: TodoService) {
-    this.todoChange = this.todoService.change
-      .subscribe(item => {
-        if (!item.completed) {
-          this.items.push(item)
-        }
-
-        return item;
-      });
-  }
-
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.todoService
-      .getItems()
-      .subscribe(items => {
-        this.items = items.filter(item => !item.completed);
-        return this.items;
-      });
+      .getPending()
+      .subscribe(items => this.items = items);
   }
-
-  public ngOnDestroy(): void {
-    this.todoChange.unsubscribe();
-  }
-
 }

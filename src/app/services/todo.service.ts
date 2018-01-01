@@ -5,6 +5,8 @@ import { TodoItem } from '../models/todo-item.model';
 import { Subject } from 'rxjs/Subject';
 import { tap } from 'rxjs/operators/tap';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
 
 @Injectable()
 export class TodoService {
@@ -21,12 +23,36 @@ export class TodoService {
     };
   }
 
+  public get(id: string): Observable<TodoItem> {
+    return this.httpClient
+      .get<TodoItem>(this.base + '/single/' + id);
+  }
+
+  public getAll(): Observable<TodoItem[]> {
+    return this.httpClient
+      .get<TodoItem[]>(this.base + '/items');
+  }
+
+  public getPending(): Observable<TodoItem[]> {
+    return this
+      .getAll()
+      .map(items => items.filter(item => !item.completed));
+  }
+
+  public getCompleted(): Observable<TodoItem[]> {
+    return this
+      .getAll()
+      .map(items => items.filter(item => item.completed));
+  }
+
+
+
   public getItem(id: string) {
     return this.httpClient
       .get<TodoItem>(this.base + '/single/' + id);
   }
 
-  public getItems() {
+  public getItems(): Observable<TodoItem[]> {
     return this.httpClient
       .get<TodoItem[]>(this.base + '/items');
   }
