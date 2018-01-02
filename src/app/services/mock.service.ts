@@ -1,9 +1,9 @@
-import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { TodoItem } from '../models/todo-item.model';
+import { InMemoryDbService } from 'angular-in-memory-web-api'
+
+import { TodoItem } from '../models/todo-item.model'
 
 export class MockService implements InMemoryDbService {
-
-  constructor() { }
+  public constructor() { }
 
   public createDb(): object {
     const items: TodoItem[] = [
@@ -37,16 +37,15 @@ export class MockService implements InMemoryDbService {
         content: 'Donec at erat magna. In laoreet orci at dolor imperdiet consequat. Nulla sit amet efficitur lorem. Nam dapibus orci et leo rutrum, in porttitor libero venenatis.',
         completed: true
       }
-    ];
+    ]
 
-    return { items };
+    return { items }
   }
 
-  genId() {
+  public genId() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
+      const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8)
+      return v.toString(16)
+    })
   }
-
 }

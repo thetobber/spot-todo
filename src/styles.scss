@@ -142,9 +142,15 @@ p {
   margin-bottom: 1rem;
 }
 
+.todo-list-container-heading  {
+  border-bottom: 1px solid black;
+  padding-bottom: 1rem;
+  margin-bottom: 0;
+}
+
 .todo-list-item {
   padding: 1rem 0;
-  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 
   .todo-list-item-header {
     font-size: 18px;

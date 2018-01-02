@@ -1,4 +1,4 @@
 <section class="todo-list-container">
-  <h1>Pending tasks</h1>
-  <app-todo-list [(data)]="items"></app-todo-list>
+  <h1 class="todo-list-container-heading">Pending tasks</h1>
+  <app-todo-list [(data)]="items" (update)="onUpdate($event)" (delete)="onDelete($event)"></app-todo-list>
 </section>

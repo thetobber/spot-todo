@@ -1,7 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { TodoItem } from '../../models/todo-item.model';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { TodoService } from '../../services/todo.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -9,61 +7,37 @@ import { TodoService } from '../../services/todo.service';
   styleUrls: ['./todo-list.component.scss']
 })
 export class TodoListComponent {
-
-  // private _data = new BehaviorSubject<TodoItem[]>([]);
-
-  // @Input()
-  // set data(items: TodoItem[]) {
-  //   this._data.next(items);
-  // }
-
-  // get data() {
-  //   return this._data.getValue();
-  // }
-
-  // private items: TodoItem[];
-
   @Input()
   public data: TodoItem[];
 
   @Output()
   public dataChange: EventEmitter<TodoItem[]> = new EventEmitter<TodoItem[]>();
 
-  constructor() { }
+  @Output()
+  public update: EventEmitter<TodoItem> = new EventEmitter<TodoItem>();
 
-  completeItem(item: TodoItem): void {
+  @Output()
+  public delete: EventEmitter<TodoItem> = new EventEmitter<TodoItem>();
+
+  onUpdate(item: TodoItem) {
     item.completed = !item.completed;
+    this.update.emit(item);
+    this.removeItemFromList(item);
   }
 
-  deleteItem(item: TodoItem): void {
-    this.data = this.data
-      .filter(x => x !== item);
-
-    this.changeData();
+  onDelete(item: TodoItem) {
+    this.delete.emit(item);
+    this.removeItemFromList(item);
   }
 
-  private changeData(): void {
+  onChange() {
     this.dataChange.emit(this.data);
   }
 
-//   updateItem(item: TodoItem): void {
-//     this.data = this.data
-//       .filter(element => element !== item);
+  private removeItemFromList(item: TodoItem) {
+    this.data = this.data
+      .filter(entry => entry !== item);
 
-//     item.completed = item.completed ? false : true;
-
-//     this.todoService
-//       .updateItem(item)
-//       .subscribe();
-//   }
-
-//   deleteItem(item: TodoItem): void {
-//     this.data = this.data
-//       .filter(element => element !== item);
-
-//     this.todoService
-//       .deleteItem(item.id)
-//       .subscribe();
-//   }
-
+    this.onChange();
+  }
 }

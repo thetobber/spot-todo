@@ -3,12 +3,10 @@
   <p>{{ item.content }}</p>
   <div class="todo-list-item-actions">
     <label>
-      <!-- <input type="checkbox" (click)="updateItem(item)" [checked]="item.completed" /> -->
-      <input type="checkbox" (click)="completeItem(item)">
+      <input type="checkbox" (click)="onUpdate(item)" [checked]="item.completed" />
       <span>{{ item.completed ? 'uncheck to remove from completed' : 'check to complete' }}</span>
     </label>
-    <a href="#">Edit</a>
-    <!-- <button (click)="deleteItem(item)">Delete</button> -->
-    <button (click)="deleteItem(item)">Delete</button>
+    <a [routerLink]="['/task', item.id]">Edit</a>
+    <button (click)="onDelete(item)">Delete</button>
   </div>
 </div>
