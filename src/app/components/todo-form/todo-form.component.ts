@@ -13,9 +13,12 @@ import { TodoService } from '../../services/todo.service'
 export class TodoFormComponent implements OnInit {
   public todoForm: FormGroup
 
-  public constructor(private formBuilder: FormBuilder, private todoService: TodoService) { }
+  public constructor(
+    private formBuilder: FormBuilder,
+    private todoService: TodoService
+  ) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.todoForm = this.formBuilder.group({
       title: ['', Validators.required],
       content: ['', Validators.required],
@@ -23,15 +26,12 @@ export class TodoFormComponent implements OnInit {
     })
   }
 
-  public addItem() {
-    let response: Observable<TodoItem>
-
-    const todoItem: TodoItem = {
-      ...this.todoForm.value
-    }
+  public addItem(): void {
+    const item: TodoItem = Object
+      .assign(new TodoItem(), this.todoForm.value)
 
     this.todoService
-      .add(todoItem)
-      .subscribe()
+      .add(item)
+      .subscribe() // TODO: Add response to list
   }
 }
