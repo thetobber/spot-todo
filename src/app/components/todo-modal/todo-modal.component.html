@@ -1,0 +1,18 @@
+<div class="modal show d-block">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <section class="modal-content">
+      <header class="modal-header">
+        <h5 class="modal-title">
+          <ng-content select="[todo-modal-title]"></ng-content>
+        </h5>
+        <button (click)="onClose($event)" type="button" class="close">
+          <span>&times;</span>
+        </button>
+      </header>
+      <div class="modal-body">
+        <ng-content select="[todo-modal-body]"></ng-content>
+      </div>
+    </section>
+  </div>
+</div>
+<div class="modal-backdrop show"></div>

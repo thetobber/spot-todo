@@ -1,20 +1,22 @@
-<form [formGroup]="todoForm" novalidate>
-  <div class="form-group">
-    <label for="title">Title</label>
-    <input id="title" class="form-control" type="text" formControlName="title">
-  </div>
-
-  <div class="form-group">
-    <label for="content">Description</label>
-    <textarea id="content" class="form-control" formControlName="content"></textarea>
-  </div>
-
-  <div class="form-group">
-    <div class="custom-control custom-checkbox">
-      <input id="completed" type="checkbox" class="custom-control-input" formControlName="completed">
-      <label for="completed" class="custom-control-label">Is the task completed?</label>
+<app-todo-modal>
+  <form [formGroup]="todoForm" novalidate todo-modal-body>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input id="title" class="form-control" type="text" formControlName="title">
     </div>
-  </div>
 
-  <button class="btn btn-primary" (click)="onSubmit()" [disabled]="todoForm.status !== 'VALID'">Add</button>
-</form>
+    <div class="form-group">
+      <label for="content">Description</label>
+      <textarea id="content" class="form-control" formControlName="content"></textarea>
+    </div>
+
+    <div class="form-group">
+      <div class="custom-control custom-checkbox">
+        <input id="completed" type="checkbox" class="custom-control-input" formControlName="completed">
+        <label for="completed" class="custom-control-label">Is the task completed?</label>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" (click)="onSubmit()" [disabled]="todoForm.status !== 'VALID'">Add</button>
+  </form>
+</app-todo-modal>

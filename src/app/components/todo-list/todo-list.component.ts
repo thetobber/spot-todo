@@ -3,21 +3,20 @@ import { TodoItem } from '../../models/todo-item.model';
 
 @Component({
   selector: 'app-todo-list',
-  templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.scss']
+  templateUrl: './todo-list.component.html'
 })
 export class TodoListComponent {
   @Input()
-  public data: TodoItem[];
+  data: TodoItem[];
 
   @Output()
-  public dataChange: EventEmitter<TodoItem[]> = new EventEmitter<TodoItem[]>();
+  dataChange: EventEmitter<TodoItem[]> = new EventEmitter<TodoItem[]>();
 
   @Output()
-  public update: EventEmitter<TodoItem> = new EventEmitter<TodoItem>();
+  update: EventEmitter<TodoItem> = new EventEmitter<TodoItem>();
 
   @Output()
-  public delete: EventEmitter<TodoItem> = new EventEmitter<TodoItem>();
+  delete: EventEmitter<TodoItem> = new EventEmitter<TodoItem>();
 
   onUpdate(item: TodoItem) {
     item.completed = !item.completed;

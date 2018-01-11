@@ -11,9 +11,10 @@
   </div>
 </div> -->
 
-<section>
-  <article *ngFor="let item of data">
-    <h3>{{ item.title }}</h3>
-    <p>{{ item.content }}</p>
-  </article>
-</section>
+<div class="list-group">
+  <a [routerLink]="[{outlets: {modal: ['e', item.id]}}]" *ngFor="let item of data" class="list-group-item list-group-item-action flex-column align-items-star">
+    <h5 class="mb-1">{{ item.title }}</h5>
+    <p class="mb-1">{{ item.content }}</p>
+    <small class="text-muted">Created {{ item.created | date: "dd.MM.y HH:mm:ss" }}</small>
+  </a>
+</div>

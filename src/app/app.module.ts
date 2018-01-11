@@ -10,46 +10,36 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api'
 
 // Components
 import { AppComponent } from './app.component'
-import { TodoNavbarComponent } from './components/todo-navbar/todo-navbar.component'
-import { TodoPendingComponent } from './components/todo-pending/todo-pending.component'
-import { TodoCompletedComponent } from './components/todo-completed/todo-completed.component'
 import { TodoEditComponent } from './components/todo-edit/todo-edit.component'
 import { TodoListComponent } from './components/todo-list/todo-list.component'
 import { TodoFormComponent } from './components/todo-form/todo-form.component'
+import { TodoBoardComponent } from './components/todo-board/todo-board.component'
+import { TodoModalComponent } from './components/todo-modal/todo-modal.component'
 
 // Services
 import { MockService } from './services/mock.service'
-import { TodoService } from './services/todo.service'
+import { TodoService } from './services/todo.service';
 
 const routes: Routes = [
   {
-    path: 'pending',
-    component: TodoPendingComponent
-  },
-  {
-    path: 'completed',
-    component: TodoCompletedComponent
-  },
-  {
-    path: 'task/:id',
-    component: TodoEditComponent
-  },
-  {
     path: '',
-    redirectTo: '/pending',
-    pathMatch: 'full'
+    component: TodoBoardComponent
+  },
+  {
+    path: 'e/:id',
+    component: TodoEditComponent,
+    outlet: 'modal'
   }
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodoNavbarComponent,
-    TodoPendingComponent,
-    TodoCompletedComponent,
     TodoListComponent,
     TodoFormComponent,
-    TodoEditComponent
+    TodoEditComponent,
+    TodoBoardComponent,
+    TodoModalComponent
   ],
   imports: [
     BrowserModule,
