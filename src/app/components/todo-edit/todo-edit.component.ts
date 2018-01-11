@@ -25,7 +25,7 @@ export class TodoEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap
-      .switchMap(this.getItem)
+      .switchMap(this.getItemId)
       .subscribe(this.setItem)
 
     this.form = this.formBuilder
@@ -50,11 +50,9 @@ export class TodoEditComponent implements OnInit {
       .subscribe(() => {
         modal.onClose($event)
       })
-
-    console.log($event)
   }
 
-  private getItem = (params: ParamMap): Observable<TodoItem> =>
+  private getItemId = (params: ParamMap): Observable<TodoItem> =>
     this.todoService
       .get(params.get('id'))
 
