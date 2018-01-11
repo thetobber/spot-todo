@@ -1,4 +1,4 @@
-<div class="todo-list-item" *ngFor="let item of data">
+<!-- <div class="todo-list-item" *ngFor="let item of data">
   <h2 class="todo-list-item-header">{{ item.title }}</h2>
   <p>{{ item.content }}</p>
   <div class="todo-list-item-actions">
@@ -9,4 +9,11 @@
     <a [routerLink]="['/task', item.id]">Edit</a>
     <button (click)="onDelete(item)">Delete</button>
   </div>
-</div>
+</div> -->
+
+<section>
+  <article *ngFor="let item of data">
+    <h3>{{ item.title }}</h3>
+    <p>{{ item.content }}</p>
+  </article>
+</section>

@@ -38,7 +38,12 @@ export class TodoEditComponent implements OnInit {
   }
 
   public updateItem() {
-    // TODO: Update item
+    let item = {...this.item}
+    Object.assign(item, this.todoForm.value)
+
+    this.todoService
+      .update(item)
+      .subscribe()
   }
 
   private getItem = (params: ParamMap): Observable<TodoItem> =>
