@@ -11,14 +11,14 @@ import { TodoService } from '../../services/todo.service'
   templateUrl: './todo-form.component.html'
 })
 export class TodoFormComponent implements OnInit {
-  public todoForm: FormGroup
+  todoForm: FormGroup
 
-  public constructor(
+  constructor(
     private formBuilder: FormBuilder,
     private todoService: TodoService
   ) { }
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.todoForm = this.formBuilder.group({
       title: ['', Validators.required],
       content: ['', Validators.required],
@@ -26,7 +26,7 @@ export class TodoFormComponent implements OnInit {
     })
   }
 
-  public addItem(): void {
+  onSubmit(): void {
     const item: TodoItem = Object
       .assign(new TodoItem(), this.todoForm.value)
 
