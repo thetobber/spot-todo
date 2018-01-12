@@ -10,36 +10,66 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api'
 
 // Components
 import { AppComponent } from './app.component'
+import { TodoNavbarComponent } from './components/todo-navbar/todo-navbar.component'
+import { TodoBoardComponent } from './components/todo-board/todo-board.component'
+import { TodoBoardPendingComponent } from './components/todo-board-pending/todo-board-pending.component'
+import { TodoBoardCompletedComponent } from './components/todo-board-completed/todo-board-completed.component'
+import { TodoModalComponent } from './components/todo-modal/todo-modal.component'
 import { TodoEditComponent } from './components/todo-edit/todo-edit.component'
 import { TodoListComponent } from './components/todo-list/todo-list.component'
 import { TodoFormComponent } from './components/todo-form/todo-form.component'
-import { TodoBoardComponent } from './components/todo-board/todo-board.component'
-import { TodoModalComponent } from './components/todo-modal/todo-modal.component'
 
 // Services
 import { MockService } from './services/mock.service'
-import { TodoService } from './services/todo.service';
+import { TodoService } from './services/todo.service'
+// import { GuardService } from './services/guard.service'
+
 
 const routes: Routes = [
   {
-    path: '',
-    component: TodoBoardComponent
+    path: 'new',
+    component: TodoFormComponent
   },
   {
-    path: 'e/:id',
-    component: TodoEditComponent,
-    outlet: 'modal'
+    path: 'edit/:id',
+    component: TodoEditComponent
+  },
+  {
+    path: '',
+    // canActivate: [GuardService],
+    children: [
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+      },
+      {
+        path: 'home',
+        component: TodoBoardComponent
+      },
+      {
+        path: 'pending',
+        component: TodoBoardPendingComponent
+      },
+      {
+        path: 'completed',
+        component: TodoBoardCompletedComponent
+      }
+    ]
   }
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodoListComponent,
-    TodoFormComponent,
-    TodoEditComponent,
+    TodoNavbarComponent,
     TodoBoardComponent,
-    TodoModalComponent
+    TodoModalComponent,
+    TodoListComponent,
+    TodoEditComponent,
+    TodoFormComponent,
+    TodoBoardPendingComponent,
+    TodoBoardCompletedComponent
   ],
   imports: [
     BrowserModule,

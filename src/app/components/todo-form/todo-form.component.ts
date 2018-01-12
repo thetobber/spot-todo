@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 import { Observable } from 'rxjs/Observable'
@@ -11,15 +12,16 @@ import { TodoService } from '../../services/todo.service'
   templateUrl: './todo-form.component.html'
 })
 export class TodoFormComponent implements OnInit {
-  todoForm: FormGroup
+  form: FormGroup
 
   constructor(
     private formBuilder: FormBuilder,
+    private router: Router,
     private todoService: TodoService
   ) { }
 
   ngOnInit(): void {
-    this.todoForm = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       title: ['', Validators.required],
       content: ['', Validators.required],
       completed: [false, Validators.required]
@@ -27,11 +29,16 @@ export class TodoFormComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.form
+      .disable()
+
     const item: TodoItem = Object
-      .assign(new TodoItem(), this.todoForm.value)
+      .assign(new TodoItem(), this.form.value)
 
     this.todoService
       .add(item)
-      .subscribe() // TODO: Add response to list
+      .subscribe(() => {
+        this.router.navigate(['home'])
+      })
   }
 }

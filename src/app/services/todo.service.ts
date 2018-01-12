@@ -54,10 +54,9 @@ export class TodoService {
       .next(items)
   }
 
-  update(item: TodoItem): Observable<TodoItem> {
+  update(newItem: TodoItem): Observable<TodoItem> {
     return this.httpClient
-      .put<TodoItem>(this.base + '/items/' + item.id, item, this.httpOptions)
-      .do(() => { this.updateItem(item) })
+      .put<TodoItem>(this.base + '/items/' + newItem.id, newItem, this.httpOptions)
   }
 
   private updateItem(newItem: TodoItem): void {

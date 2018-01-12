@@ -1,18 +1,5 @@
-<!-- <div class="todo-list-item" *ngFor="let item of data">
-  <h2 class="todo-list-item-header">{{ item.title }}</h2>
-  <p>{{ item.content }}</p>
-  <div class="todo-list-item-actions">
-    <label>
-      <input type="checkbox" (click)="onUpdate(item)" [checked]="item.completed" />
-      <span>{{ item.completed ? 'uncheck to remove from completed' : 'check to complete' }}</span>
-    </label>
-    <a [routerLink]="['/task', item.id]">Edit</a>
-    <button (click)="onDelete(item)">Delete</button>
-  </div>
-</div> -->
-
 <div class="list-group">
-  <a [routerLink]="[{outlets: {modal: ['e', item.id]}}]" *ngFor="let item of data" class="list-group-item list-group-item-action flex-column align-items-star">
+  <a href="{{'/edit/' + item.id}}" *ngFor="let item of data" class="list-group-item list-group-item-action flex-column align-items-star">
     <h5 class="mb-1">{{ item.title }}</h5>
     <p class="mb-1">{{ item.content }}</p>
     <small class="text-muted">Created {{ item.created | date: "dd.MM.y HH:mm:ss" }}</small>

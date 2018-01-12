@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef } from '@angular/core'
-import { ActivatedRoute, ParamMap } from '@angular/router'
+import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 import { Observable } from 'rxjs/Observable'
@@ -19,6 +19,7 @@ export class TodoEditComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private router: Router,
     private route: ActivatedRoute,
     private todoService: TodoService
   ) { }
@@ -38,7 +39,7 @@ export class TodoEditComponent implements OnInit {
     this.form.disable()
   }
 
-  onSubmit($event: Event, modal: TodoModalComponent): void {
+  onSubmit(): void {
     this.form
       .disable()
 
@@ -48,7 +49,7 @@ export class TodoEditComponent implements OnInit {
     this.todoService
       .update(item)
       .subscribe(() => {
-        modal.onClose($event)
+        this.router.navigate(['home'])
       })
   }
 
